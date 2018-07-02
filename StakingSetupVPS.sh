@@ -28,8 +28,8 @@ sudo free
 sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
 cd
 
-wget https://github.com/zabtc/Northern/releases/download/1.0.0/northern-1.0.0-x86_64-linux-gnu.tar.gz
-tar -xzf northern-1.0.0-x86_64-linux-gnu.tar.gz
+wget https://github.com/realtime-proj/realtime/releases/download/v1.0.0/realtime-v1.0.0-linux.tar.gz
+tar -xzf realtime-v1.0.0-linux.tar.gz
 
 sudo apt-get install -y ufw
 sudo ufw allow ssh/tcp
@@ -37,39 +37,27 @@ sudo ufw limit ssh/tcp
 sudo ufw logging on
 echo "y" | sudo ufw enable
 sudo ufw status
-sudo ufw allow 6942/tcp
+sudo ufw allow 9032/tcp
   
 cd
-mkdir -p .northern
-echo "staking=1" >> northern.conf
-echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> northern.conf
-echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> northern.conf
-echo "rpcallowip=127.0.0.1" >> northern.conf
-echo "listen=1" >> northern.conf
-echo "server=1" >> northern.conf
-echo "daemon=1" >> northern.conf
-echo "logtimestamps=1" >> northern.conf
-echo "maxconnections=256" >> northern.conf
-echo "addnode=209.250.233.104" >> northern.conf
-echo "addnode=45.77.82.101" >> northern.conf
-echo "addnode=138.68.167.127" >> northern.conf
-echo "addnode=207.246.86.118" >> northern.conf
-echo "addnode=149.56.4.247" >> northern.conf
-echo "addnode=149.56.4.246" >> northern.conf
-echo "addnode=149.56.4.245" >> northern.conf
-echo "addnode=149.56.4.244" >> northern.conf
-echo "addnode=149.56.4.243" >> northern.conf
-echo "addnode=149.56.4.242" >> northern.conf
-echo "addnode=149.56.4.241" >> northern.conf
-echo "port=6942" >> northern.conf
-mv northern.conf .northern
+mkdir -p .realtime
+echo "staking=1" >> realtime.conf
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> realtime.conf
+echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> realtime.conf
+echo "rpcallowip=127.0.0.1" >> realtime.conf
+echo "listen=1" >> realtime.conf
+echo "server=1" >> realtime.conf
+echo "daemon=1" >> realtime.conf
+echo "logtimestamps=1" >> realtime.conf
+echo "maxconnections=256" >> realtime.conf
+echo "port=9032" >> realtime.conf
+mv realtime.conf .realtime
 
   
 cd
-./northernd -daemon
+./realtimed -daemon
 sleep 30
-./northern-cli getinfo
+./realtime-cli getinfo
 sleep 5
-./northern-cli getnewaddress
-echo "Use the address above to send your NORT coins to this server"
-echo "If you found this helpful, please donate NORT to NNq96FUcDRj62vX5CdbNeAFjG3MTYeeeHn"
+./realtime-cli getnewaddress
+echo "Use the address above to send your RLT coins to this server"
