@@ -88,7 +88,7 @@ Once you see "Masternode setup completed." on screen, you are done.
 ### To check your masternode status on your VPS, navigate to /usr/local/bin and then run 
 
 ```bash
-./RealTime-cli masternode status
+./realtime-cli masternode status
 ```
 
 
